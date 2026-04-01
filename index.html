@@ -1,0 +1,353 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: arial, sans-serif; background: #fff; }
+
+  .phone-frame {
+    width: 390px;
+    min-height: 844px;
+    margin: 0 auto;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .status-time { font-size: 15px; font-weight: 700; }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+
+  .search-bar-wrap {
+    padding: 6px 14px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .google-logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+  .g-blue { color: #4285F4; }
+  .g-red { color: #EA4335; }
+  .g-yellow { color: #FBBC05; }
+  .g-green { color: #34A853; }
+
+  .search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #f1f3f4;
+    border-radius: 22px;
+    padding: 9px 14px;
+    gap: 8px;
+  }
+
+  .search-icon { font-size: 14px; color: #5f6368; }
+  .search-text { font-size: 14px; color: #202124; flex: 1; }
+  .mic-icon { color: #4285F4; font-size: 15px; }
+
+  .tabs {
+    display: flex;
+    padding: 8px 14px 0;
+    gap: 0;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    font-size: 13px;
+    padding: 8px 14px;
+    color: #5f6368;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+  }
+  .tab.active {
+    color: #1a73e8;
+    border-bottom: 3px solid #1a73e8;
+    font-weight: 500;
+  }
+
+  .results-count {
+    font-size: 12px;
+    color: #70757a;
+    padding: 8px 16px 4px;
+  }
+
+  .result {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f3f4;
+  }
+
+  .result-source {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .favicon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .site-name { font-size: 12px; color: #202124; }
+  .site-url { font-size: 11px; color: #4d5156; }
+
+  .result-title {
+    font-size: 17px;
+    color: #1a0dab;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+
+  .result-desc {
+    font-size: 13px;
+    color: #4d5156;
+    line-height: 1.5;
+  }
+
+  .result-desc .date {
+    color: #70757a;
+    font-size: 12px;
+  }
+
+  .kebab {
+    float: right;
+    color: #70757a;
+    font-size: 18px;
+    margin-top: -2px;
+  }
+
+  .people-also-ask {
+    margin: 8px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .paa-header {
+    font-size: 15px;
+    font-weight: 500;
+    color: #202124;
+    padding: 12px 16px;
+  }
+
+  .paa-item {
+    padding: 12px 16px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 14px;
+    color: #202124;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .paa-arrow { color: #5f6368; font-size: 16px; }
+
+  .featured {
+    margin: 8px 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 14px;
+  }
+
+  .featured-title {
+    font-size: 17px;
+    color: #1a0dab;
+    margin-bottom: 6px;
+    font-weight: normal;
+  }
+
+  .featured-source {
+    font-size: 12px;
+    color: #4d5156;
+    margin-bottom: 8px;
+  }
+
+  .featured-list {
+    list-style: decimal;
+    padding-left: 18px;
+  }
+
+  .featured-list li {
+    font-size: 14px;
+    color: #202124;
+    padding: 2px 0;
+  }
+</style>
+
+<div class="phone-frame">
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+        <rect x="0" y="4" width="3" height="8" rx="1" fill="#202124"/>
+        <rect x="4.5" y="2.5" width="3" height="9.5" rx="1" fill="#202124"/>
+        <rect x="9" y="0.5" width="3" height="11.5" rx="1" fill="#202124"/>
+        <rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="#202124" opacity="0.3"/>
+      </svg>
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="#202124">
+        <path d="M8 2C5.2 2 2.7 3.2 1 5.2L2.4 6.6C3.8 5 5.8 4 8 4s4.2 1 5.6 2.6L15 5.2C13.3 3.2 10.8 2 8 2z"/>
+        <path d="M8 5C6.3 5 4.8 5.7 3.7 6.8L5.1 8.2C5.9 7.4 7 7 8 7s2.1.5 2.9 1.2L12.3 6.8C11.2 5.7 9.7 5 8 5z"/>
+        <circle cx="8" cy="10" r="1.5"/>
+      </svg>
+      <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+        <rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#202124" stroke-opacity="0.35"/>
+        <rect x="2" y="2" width="18" height="9" rx="2" fill="#202124"/>
+        <path d="M24 4.5v4a2 2 0 000-4z" fill="#202124" fill-opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="search-bar-wrap">
+    <div class="google-logo">
+      <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+    </div>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <span class="search-text">names for boys</span>
+      <span class="mic-icon">🎤</span>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active">All</div>
+    <div class="tab">Images</div>
+    <div class="tab">News</div>
+    <div class="tab">Videos</div>
+    <div class="tab">Shopping</div>
+    <div class="tab">More</div>
+  </div>
+
+  <div class="results-count">About 4,12,00,000 results (0.48 seconds)</div>
+
+  <div class="featured">
+    <div class="featured-title">Popular names for boys 2024</div>
+    <div class="featured-source">nameberry.com</div>
+    <ul class="featured-list">
+      <li>Liam</li>
+      <li>Noah</li>
+      <li>Oliver</li>
+      <li>Theodore</li>
+      <li>Elijah</li>
+    </ul>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#e91e63;">N</div>
+      <div>
+        <div class="site-name">Nameberry</div>
+        <div class="site-url">nameberry.com › boy-names</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Popular names for boys — Top 100 boy names right now</div>
+    <div class="result-desc"><span class="date">Mar 12, 2025 — </span>Discover the most popular boy names of 2025, from timeless classics to modern favorites trending worldwide.</div>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#ff6f00;">B</div>
+      <div>
+        <div class="site-name">BabyCenter</div>
+        <div class="site-url">babycenter.com › baby-names › boys</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Unique names for boys — Rare & uncommon baby boy names</div>
+    <div class="result-desc">Looking for something one-of-a-kind? Explore our curated list of unique and distinctive boy names that stand out from the crowd.</div>
+  </div>
+
+  <div class="people-also-ask">
+    <div class="paa-header">People also ask</div>
+    <div class="paa-item">What are Gen Z names for boys? <span class="paa-arrow">▾</span></div>
+    <div class="paa-item">What are celebrity names for boys? <span class="paa-arrow">▾</span></div>
+    <div class="paa-item">What are the rarest boy names? <span class="paa-arrow">▾</span></div>
+    <div class="paa-item">What boy names are trending in 2025? <span class="paa-arrow">▾</span></div>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#1976d2;">W</div>
+      <div>
+        <div class="site-name">What to Expect</div>
+        <div class="site-url">whattoexpect.com › baby-names</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Gen Z names for boys — Cool names the new generation loves</div>
+    <div class="result-desc">From Kai to Zephyr, these Gen Z boy names are fresh, bold, and breaking the mold. Find the perfect modern name for your little one.</div>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#43a047;">P</div>
+      <div>
+        <div class="site-name">Parents Magazine</div>
+        <div class="site-url">parents.com › baby-names › boys</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Celebrity names for boys — Names inspired by the stars</div>
+    <div class="result-desc"><span class="date">Jan 4, 2025 — </span>Celebrity babies get the most unique names. Here's a roundup of the coolest celebrity-inspired boy names you'll want to steal.</div>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#8e24aa;">T</div>
+      <div>
+        <div class="site-name">The Bump</div>
+        <div class="site-url">thebump.com › baby-names</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Old-fashioned names for boys making a comeback in 2025</div>
+    <div class="result-desc">Vintage boy names are having a major moment. Think Arlo, Jasper, and August — classic names with a timeless, sophisticated charm.</div>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#00897b;">S</div>
+      <div>
+        <div class="site-name">SheKnows</div>
+        <div class="site-url">sheknows.com › parenting › baby-names</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Short names for boys — Simple, strong, and unforgettable</div>
+    <div class="result-desc">One-syllable boy names pack a punch. Leo, Ace, Rhys, Cole — short boy names that are easy to say but impossible to forget.</div>
+  </div>
+
+  <div class="result">
+    <div class="result-source">
+      <div class="favicon" style="background:#e53935;">M</div>
+      <div>
+        <div class="site-name">MomJunction</div>
+        <div class="site-url">momjunction.com › baby-names › boy</div>
+      </div>
+      <span class="kebab">⋮</span>
+    </div>
+    <div class="result-title">Mythological names for boys — Powerful names from ancient legends</div>
+    <div class="result-desc">Names like Apollo, Atlas, Orion, and Caspian carry an epic, timeless weight. Find the most powerful mythological boy names here.</div>
+  </div>
+
+</div>
